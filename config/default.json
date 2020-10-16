@@ -1,0 +1,8 @@
+{
+"firebase": {
+        "database-url": "https://fir-8b4cd.firebaseio.com",
+        "auth-domain": "fir-8b4cd.firebaseapp.com"
+      },
+    "api-default-port":3000
+
+}
