@@ -11,13 +11,12 @@ const db = admin.firestore();
 const firebaseService = {};
 
 
-firebaseService.getItems =(collectionName)=>{
-   // console.log('getting Items ..');
+firebaseService.getItems =(collectionName, query=null)=>{
     let result = [];
+    let  docRef =  query == null ?db.collection(collectionName).get():
+    db.collection(collectionName).where(query.key, query.operator, query.value).get();
     return new Promise((resolve,reject)=>{
-        db.collection(collectionName).get().then((docs) => {
-     //   console.log(' Items result..');
-        //console.log(querySnapshot.docs);
+        docRef.then((docs) => {
         docs.forEach((doc) => {
             result.push({"id":doc.id,"data":doc.data()});
         });
@@ -51,7 +50,6 @@ firebaseService.upsertItem =(collectionName,obj,id=null)=>{
 }
 
 firebaseService.deleteItem =(collectionName,id)=>{
-    console.log('deleting Item ..');
     let docRef =  db.collection(collectionName).doc(id);
     return new Promise((resolve,reject)=>{
         docRef.delete().then(()=> {
@@ -61,6 +59,7 @@ firebaseService.deleteItem =(collectionName,id)=>{
         });
     });
 }
+
 module.exports = firebaseService;
     
    
