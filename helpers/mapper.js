@@ -5,7 +5,7 @@ const mappingHelper = {};
 mappingHelper.mapProduct=(product)=>{
     if(!product)
     return;
-        const productDepartment = _.find(lookupsService.departments,(dep)=>{ return dep.id == product.data.department_id });
+        const productDepartment = _.find(lookupsService.departments,(dep)=>{ return dep.id == product.data.departmentId });
        const productsPromotion = _.find(lookupsService.productsPromotions,(promo)=>{ return promo.data.product_id == product.id });
     
         let promotionDetails = null;
@@ -17,10 +17,11 @@ mappingHelper.mapProduct=(product)=>{
         'id': product.id, 
         'name': product.data.name,
         'price':product.data.price,
-        'departmentId':product.data.department_id,
+        'departmentId':product.data.departmentId,
         'departmentName':productDepartment == null ? null:productDepartment.name,
         'promotionId':promotionDetails == null ? null:promotionDetails.id,
         'promotionCode':promotionDetails== null? null :promotionDetails.code,
+        'promotionDiscount':promotionDetails== null? null :promotionDetails.discount,
         'promoDiscounedPrice': promotionDetails== null? null :(product.data.price * promotionDetails.discount)/100,
         'isPromoActive':promotionDetails== null? null : promotionDetails.active};
 

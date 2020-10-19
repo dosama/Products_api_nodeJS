@@ -1,5 +1,5 @@
 const express =  require('express');
-const firebaseService = require('../services/firebase-service');
+const firebaseService = require('../services/firebase-database-service');
 const lookupsService = require('../services/lookups-service');
 const collectionName='Promotions';
 const router = express.Router();

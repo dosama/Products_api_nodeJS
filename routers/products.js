@@ -1,6 +1,6 @@
 const express =  require('express');
 const _ =  require('lodash');
-const firebaseService = require('../services/firebase-service');
+const firebaseService = require('../services/firebase-database-service');
 const mappingHelper = require('../helpers/mapper');
 const router = express.Router();
 const collectionName='Products';
@@ -21,22 +21,17 @@ products.forEach(product => {
    
 router.get('/department/:depId/promotion/:promoId', (req, res) => {
     let responseResult = [];
-    let query = typeof req.params.depId === 'undefined' 
-    ||!req.params.depId || req.params.depId != 'null'? null 
-    :{'key':'department_id', 'operator':'==','value':req.params.depId};
+    
 
-    firebaseService.getItems(collectionName, query
+    firebaseService.getItems(collectionName
 ).then((result)=>{
 let products = result;
     products.forEach(product => {
         responseResult.push(mappingHelper.mapProduct(product));
        });
-  
-       if(req.params.promoId && req.params.promoId != 'null'){
-         
-        responseResult = _.filter(responseResult,(o)=>{return o.promotionId == req.params.promoId});
-       }
-      
+
+       responseResult = _.filter(responseResult,(o)=>{return o.departmentId == req.params.depId ||o.promotionId == req.params.promoId });
+
     res.send(responseResult);
 }).catch(err=>console.error(err));
  
@@ -57,7 +52,7 @@ router.post('/', (req, res) => {
   let obj ={
         name: req.body.name,
         price: req.body.price,
-        department_id: req.body.department_id
+        departmentId: req.body.departmentId
     }
     firebaseService.upsertItem(collectionName
 ,obj).then((result)=>{
@@ -70,7 +65,7 @@ router.put('/:id', (req, res) => {
     let obj ={
         name: req.body.name,
         price: req.body.price,
-        department_id: req.body.department_id
+        departmentId: req.body.departmentId
     }
     firebaseService.upsertItem(collectionName
 ,obj,req.params.id).then((result)=>{

@@ -1,6 +1,6 @@
 
 
-const firebaseService = require('../services/firebase-service');
+const firebaseService = require('../services/firebase-database-service');
 const lookupsService = {};
 const promotionsCollectionName='Promotions';
 const departmentsCollectionName= 'Departments';
