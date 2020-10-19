@@ -11,12 +11,12 @@ lookupsService.promotions = [];
 lookupsService.productsPromotions = [];
 
 
-mapDepartment=(item)=>{
+lookupsService.mapDepartment=(item)=>{
     return {'id': item.id, 
     'name': item.data.name};
 }
 
-mapPromotions=(item)=>{
+lookupsService.mapPromotions=(item)=>{
     return {'id': item.id, 
     'code': item.data.code,
     'discount':item.data.discount,
@@ -35,11 +35,11 @@ lookupsService.loadLookupsData =async ()=>{
 
                  
     result[0].forEach((item)=>{
-        lookupsService.departments.push(mapDepartment(item));
+        lookupsService.departments.push(lookupsService.mapDepartment(item));
     });
 
     result[1].forEach((item)=>{
-        lookupsService.promotions.push(mapPromotions(item));
+        lookupsService.promotions.push(lookupsService.mapPromotions(item));
         });
 
         lookupsService.productsPromotions =  result[2];
