@@ -24,6 +24,8 @@ Configurations are stored in config/default.json file
 
 
 **prerequisites:**
+
+
 1- Install nodemon package globally:
 
 ```shell
