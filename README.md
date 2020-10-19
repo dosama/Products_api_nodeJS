@@ -22,18 +22,6 @@ Configurations are stored in config/default.json file
 
 ```
 
-
-**prerequisites:**
-
-
-1- Install nodemon package globally:
-
-```shell
-$ npm i -g nodemon
-```
-
-2- copy admin.json file to application root :
-
 **Use configs in your code:**
 
 ```js
@@ -48,6 +36,16 @@ Use `config.has()` to test if a configuration value is defined.
 
 
 **Start your app server:**
+
+1- Install nodemon package globally:
+
+```shell
+$ npm i -g nodemon
+```
+
+2- copy admin.json file to application root.
+
+3- run the follwoing command:
 
 ```shell
 $ nodemon index.js
