@@ -19,6 +19,7 @@ describe("mapPromotions()", () => {
     });
 });
 
+
 // mapDepartment=(item)=>{
 //     return {'id': item.id, 
 //     'name': item.data.name};
